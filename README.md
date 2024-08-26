@@ -6,7 +6,9 @@ This project provides code for performing inference with [BiRefNet](https://gith
 using [TensorRT](https://developer.nvidia.com/tensorrt). The aim is to accelerate the inference process by leveraging
 the high-performance capabilities of TensorRT.
 
-BiRefNet's ONNX model inference requires a significant amount of time; the first inference takes about 5 seconds on my
+BiRefNet's ONNX model inference requires
+a [significant amount of time](https://github.com/ZhengPeng7/BiRefNet?tab=readme-ov-file#model-zoo); the first inference
+takes about 5 seconds on my
 machine. Even subsequent inferences, though faster, are still slower compared to PyTorch. Therefore, TensorRT is used
 for inference in this project. After testing, TensorRT not only reduces the required GPU memory but also improves
 inference speed compared to PyTorch. On a 4080 Super GPU, TensorRT uses 6GB of memory and achieves inference in just
@@ -52,3 +54,13 @@ Now, you can run inference using the TensorRT engine with the following command:
  python .\infer.py --image-path image_path --output-path result.png --output-alpha-path result_alpha.png --engine-path .\engine.trt
 
 ```
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request or open an Issue if you have any suggestions or
+find bugs.
+
+## Thanks
+
+1. [Birefnet](https://github.com/ZhengPeng7/BiRefNet)
+2. [fast-foreground-estimation](https://github.com/Photoroom/fast-foreground-estimation)
