@@ -1,0 +1,8 @@
+*.pyc
+*.onnx
+*.png
+*.jpg
+*.trt
+# PyCharm
+../.idea/
+.idea/

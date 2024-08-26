@@ -1,0 +1,4 @@
+tensorrt==10.1.0
+pillow==10.4.0
+opencv-python==4.10.0.84
+cuda-python==12.6.0
