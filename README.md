@@ -22,7 +22,7 @@ inference speed compared to PyTorch. On a 4080 Super GPU, TensorRT uses 6GB of m
 
 ## Prerequisites
 
-- NVIDIA GPU with CUDA and Cudnn
+- NVIDIA GPU with CUDA(>=11.X) and Cudnn(>=8.X)
 - Python 3.9
 
 ## Installation
