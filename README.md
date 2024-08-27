@@ -14,10 +14,14 @@ for inference in this project. After testing, TensorRT not only reduces the requ
 inference speed compared to PyTorch. On a 4080 Super GPU, TensorRT uses 6GB of memory and achieves inference in just
 **0.13** seconds.
 
+[![Open In Colab](https://colab.research.google.com/drive/1r8GkFPyMMO0OkMX6ih5FjZnUCQrl2SHV?usp=sharing)
+
+
 ## Features
 
-- [x] Efficient inference with BiRefNet using TensorRT.
+- [x] Efficient inference with BiRefNet using TensorRT
 - [x] foreground estimate
+- [x] colab example
 - [ ] Performance comparison between PyTorch, ONNX, and TensorRT inference
 - [ ] Inference using Docker for an isolated and reproducible environment
 
