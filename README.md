@@ -58,10 +58,18 @@ convert_onnx_to_engine(onnx_file_path, engine_file_path)
 
 Now, you can run inference using the TensorRT engine with the following command:
 
+#### 3.1 single infer
+
 ```commandline
  python .\infer.py --image-path image_path --output-path result.png --output-alpha-path result_alpha.png --engine-path .\engine.trt
 
 ```
+
+#### 3.2 infer for directory
+```commandline
+python .\infer.py --image-path image_dir --output-path output_dir --output-alpha-path alpha_dir --engine-path .\engine.trt --mode m
+```
+
 
 ## Contributing
 

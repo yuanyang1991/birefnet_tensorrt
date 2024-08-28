@@ -1,10 +1,11 @@
 import argparse
+import os
 
 import cv2
-import tensorrt as trt
-from tensorrt_bindings import Logger
-from PIL import Image
 import numpy as np
+import tensorrt as trt
+from PIL import Image
+from tensorrt_bindings import Logger
 
 import common
 from transformers import Compose, Resize, ToTensor, Normalize, ToPILImage
@@ -64,26 +65,9 @@ def fb_blur_fusion_foreground_estimator(image, foreground, background, alpha, bl
     return foreground, blurred_background
 
 
-def main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--image-path", type=str, help="input path of image")
-    parser.add_argument("--output-path", type=str, help="output path of result")
-    parser.add_argument("--output-alpha-path", type=str, help="output alpha path")
-    parser.add_argument("--engine-path", type=str, help="path of tensorrt engine")
-    args = parser.parse_args()
-
-    runtime = trt.Runtime(logger)
-    engine = runtime.deserialize_cuda_engine(load_engine(args.engine_path))
-    context = engine.create_execution_context()
-
-    transformers = Compose([
-        Resize((1024, 1024)),
-        ToTensor(),
-        Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
-    ])
-    numpy_to_pil = ToPILImage()
-
-    origin_image = Image.open(args.image_path).convert("RGB")
+def infer_single(image_path, output_path, output_alpha_path, engine, context, transformers, numpy_to_pil):
+    print(f"image path: {image_path}")
+    origin_image = Image.open(image_path).convert("RGB")
     w, h = origin_image.size
     image_data = np.expand_dims(transformers(origin_image), axis=0).ravel()
 
@@ -99,9 +83,48 @@ def main():
     estimated_foreground = fb_blur_fusion_foreground_estimator_2(origin_image_array, predicted_alpha_array)
     result = Image.fromarray((estimated_foreground * 255.0).astype(np.uint8))
     result.putalpha(predicted_alpha)
-    result.save(args.output_path)
-    predicted_alpha.save(args.output_alpha_path)
+    # save_output_path = os.path.join(output_path, image_name.replace(".jpg", ".png"))
+    result.save(output_path)
+    # save_alpha_path = os.path.join(output_alpha_path, image_name.replace(".jpg", ".png"))
+    predicted_alpha.save(output_alpha_path)
     common.free_buffers(inputs, outputs, stream)
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--image-path", type=str, required=True, help="input path of image or input dir when mode=m")
+    parser.add_argument("--output-path", type=str, required=True,
+                        help="output path of result or output dir when mode=m")
+    parser.add_argument("--output-alpha-path", type=str, required=True,
+                        help="output alpha path or alpha die when mode=m")
+    parser.add_argument("--engine-path", type=str, required=True, help="path of tensorrt engine")
+    parser.add_argument("--process-size", type=int, default=1024)
+    parser.add_argument("--mode", choices=["s", "m"], default="s")
+    args = parser.parse_args()
+
+    runtime = trt.Runtime(logger)
+    engine = runtime.deserialize_cuda_engine(load_engine(args.engine_path))
+    context = engine.create_execution_context()
+
+    transformers = Compose([
+        Resize((1024, 1024)),
+        ToTensor(),
+        Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
+    ])
+    numpy_to_pil = ToPILImage()
+
+    if args.mode == "s":
+        infer_single(args.image_path, args.output_path, args.output_alpha_path, engine, context, transformers,
+                     numpy_to_pil)
+    else:
+        images = os.listdir(args.image_path)
+        for image in images:
+            print(f"image: {image}")
+            image_path = os.path.join(args.image_path, image)
+            output_image_path = os.path.join(args.output_path, image).replace(".jpg", ".png")
+            output_alpha_path = os.path.join(args.output_alpha_path, image).replace(".jpg", ".png")
+            infer_single(image_path, output_image_path, output_alpha_path, engine, context, transformers,
+                         numpy_to_pil)
 
 
 if __name__ == "__main__":
