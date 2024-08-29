@@ -36,7 +36,8 @@ inference speed compared to PyTorch. On a 4080 Super GPU, TensorRT uses 6GB of m
 
 > **Note:**
 > 1. Both the PyTorch and ONNX models are from the [official BiRefNet GitHub](https://github.com/ZhengPeng7/BiRefNet).
-> 3. The TensorRT model was converted using [this](#Usage) project.
+> 2. The TensorRT model was converted
+     using [Convert-ONNX-Model-to-TensorRT-Engine](#2-Convert-ONNX-Model-to-TensorRT-Engine) project.
 > 3. All tests were conducted on a Win10 system with an RTX 4080 Super.
 > 4. Refer to [model_compare.py](./model_compare.py) for the conversion code.
 
