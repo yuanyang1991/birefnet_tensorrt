@@ -16,6 +16,29 @@ inference speed compared to PyTorch. On a 4080 Super GPU, TensorRT uses 6GB of m
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1r8GkFPyMMO0OkMX6ih5FjZnUCQrl2SHV?usp=sharing)
 
+## Inference Time Comparison
+
+### 1. First Inference Time
+
+|                                        Method                                        | inference time |
+|:------------------------------------------------------------------------------------:|:--------------:|
+|  [Pytorch](https://drive.google.com/file/d/1_IfUnu8Fpfn-nerB89FzdNXQ7zk6FKxc/view)   |     0.71s      |
+| [ONNX](https://drive.google.com/drive/u/0/folders/1kZM55bwsRdS__bdnsXpkmH6QPyza-9-N) |     5.32s      |
+|                                       Tensorrt                                       |     0.17s      |
+
+### 2. Average Inference Time (excluding the first)
+
+|                                        Method                                        | inference time |
+|:------------------------------------------------------------------------------------:|:--------------:|
+|  [Pytorch](https://drive.google.com/file/d/1_IfUnu8Fpfn-nerB89FzdNXQ7zk6FKxc/view)   |     0.15s      |
+| [ONNX](https://drive.google.com/drive/u/0/folders/1kZM55bwsRdS__bdnsXpkmH6QPyza-9-N) |     4.43s      |
+|                                       Tensorrt                                       |     0.11s      |
+
+> **Note:**
+> 1. Both the PyTorch and ONNX models are from the [official BiRefNet GitHub](https://github.com/ZhengPeng7/BiRefNet).
+> 3. The TensorRT model was converted using [this](#Usage) project.
+> 3. All tests were conducted on a Win10 system with an RTX 4080 Super.
+> 4. Refer to model_compare.py for the conversion code.
 
 ## Features
 
@@ -38,8 +61,10 @@ pip install -r requirements.txt
 
 ## Usage
 
-### 1. download onnx model 
-First, download onnx model from [Google Drive](https://drive.google.com/drive/u/0/folders/1kZM55bwsRdS__bdnsXpkmH6QPyza-9-N)
+### 1. download onnx model
+
+First, download onnx model
+from [Google Drive](https://drive.google.com/drive/u/0/folders/1kZM55bwsRdS__bdnsXpkmH6QPyza-9-N)
 
 ### 2. Convert ONNX Model to TensorRT Engine
 
@@ -66,10 +91,10 @@ Now, you can run inference using the TensorRT engine with the following command:
 ```
 
 #### 3.2 infer for directory
+
 ```commandline
 python .\infer.py --image-path image_dir --output-path output_dir --output-alpha-path alpha_dir --engine-path .\engine.trt --mode m
 ```
-
 
 ## Contributing
 

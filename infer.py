@@ -83,9 +83,7 @@ def infer_single(image_path, output_path, output_alpha_path, engine, context, tr
     estimated_foreground = fb_blur_fusion_foreground_estimator_2(origin_image_array, predicted_alpha_array)
     result = Image.fromarray((estimated_foreground * 255.0).astype(np.uint8))
     result.putalpha(predicted_alpha)
-    # save_output_path = os.path.join(output_path, image_name.replace(".jpg", ".png"))
     result.save(output_path)
-    # save_alpha_path = os.path.join(output_alpha_path, image_name.replace(".jpg", ".png"))
     predicted_alpha.save(output_alpha_path)
     common.free_buffers(inputs, outputs, stream)
 
