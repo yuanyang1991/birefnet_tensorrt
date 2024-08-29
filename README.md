@@ -45,7 +45,7 @@ inference speed compared to PyTorch. On a 4080 Super GPU, TensorRT uses 6GB of m
 - [x] Efficient inference with BiRefNet using TensorRT
 - [x] foreground estimate
 - [x] colab example
-- [ ] Performance comparison between PyTorch, ONNX, and TensorRT inference
+- [x] Performance comparison between PyTorch, ONNX, and TensorRT inference
 - [ ] Inference using Docker for an isolated and reproducible environment
 
 ## Prerequisites
