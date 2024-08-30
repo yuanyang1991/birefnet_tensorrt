@@ -6,26 +6,21 @@ This project provides code for performing inference with [BiRefNet](https://gith
 using [TensorRT](https://developer.nvidia.com/tensorrt). The aim is to accelerate the inference process by leveraging
 the high-performance capabilities of TensorRT.
 
-
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1r8GkFPyMMO0OkMX6ih5FjZnUCQrl2SHV?usp=sharing)
 
 ## Inference Time Comparison
 
 ### 1. First Inference Time
 
-|                                        Method                                        | inference time |
-|:------------------------------------------------------------------------------------:|:--------------:|
-|  [Pytorch](https://drive.google.com/file/d/1_IfUnu8Fpfn-nerB89FzdNXQ7zk6FKxc/view)   |     0.71s      |
-| [ONNX](https://drive.google.com/drive/u/0/folders/1kZM55bwsRdS__bdnsXpkmH6QPyza-9-N) |     5.32s      |
-|                                       Tensorrt                                       |     0.17s      |
+|     Method     | [Pytorch](https://drive.google.com/file/d/1_IfUnu8Fpfn-nerB89FzdNXQ7zk6FKxc/view) | [ONNX](https://drive.google.com/drive/u/0/folders/1kZM55bwsRdS__bdnsXpkmH6QPyza-9-N) | Tensorrt  |
+|:--------------:|:---------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------:|:---------:|
+| inference time |                                       0.71s                                       |                                        5.32s                                         | **0.17s** |                
 
 ### 2. Average Inference Time (excluding the first)
 
-|                                        Method                                        | inference time |
-|:------------------------------------------------------------------------------------:|:--------------:|
-|  [Pytorch](https://drive.google.com/file/d/1_IfUnu8Fpfn-nerB89FzdNXQ7zk6FKxc/view)   |     0.15s      |
-| [ONNX](https://drive.google.com/drive/u/0/folders/1kZM55bwsRdS__bdnsXpkmH6QPyza-9-N) |     4.43s      |
-|                                       Tensorrt                                       |     0.11s      |
+|     Method     | [Pytorch](https://drive.google.com/file/d/1_IfUnu8Fpfn-nerB89FzdNXQ7zk6FKxc/view) | [ONNX](https://drive.google.com/drive/u/0/folders/1kZM55bwsRdS__bdnsXpkmH6QPyza-9-N) | Tensorrt  |
+|:--------------:|:---------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------:|:---------:|
+| inference time |                                       0.15s                                       |                                        4.43s                                         | **0.11s** |  
 
 > **Note:**
 > 1. Both the PyTorch and ONNX models are from the [official BiRefNet GitHub](https://github.com/ZhengPeng7/BiRefNet).
