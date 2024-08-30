@@ -6,13 +6,6 @@ This project provides code for performing inference with [BiRefNet](https://gith
 using [TensorRT](https://developer.nvidia.com/tensorrt). The aim is to accelerate the inference process by leveraging
 the high-performance capabilities of TensorRT.
 
-BiRefNet's ONNX model inference requires
-a [significant amount of time](https://github.com/ZhengPeng7/BiRefNet?tab=readme-ov-file#model-zoo); the first inference
-takes about 5 seconds on my
-machine. Even subsequent inferences, though faster, are still slower compared to PyTorch. Therefore, TensorRT is used
-for inference in this project. After testing, TensorRT not only reduces the required GPU memory but also improves
-inference speed compared to PyTorch. On a 4080 Super GPU, TensorRT uses 6GB of memory and achieves inference in just
-**0.13** seconds.
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1r8GkFPyMMO0OkMX6ih5FjZnUCQrl2SHV?usp=sharing)
 
@@ -37,8 +30,8 @@ inference speed compared to PyTorch. On a 4080 Super GPU, TensorRT uses 6GB of m
 > **Note:**
 > 1. Both the PyTorch and ONNX models are from the [official BiRefNet GitHub](https://github.com/ZhengPeng7/BiRefNet).
 > 2. The TensorRT model was converted
-     using [Convert-ONNX-Model-to-TensorRT-Engine](#2-Convert-ONNX-Model-to-TensorRT-Engine) project.
-> 3. All tests were conducted on a Win10 system with an RTX 4080 Super.
+     using [Convert-ONNX-Model-to-TensorRT-Engine](#2-Convert-ONNX-Model-to-TensorRT-Engine).
+> 3. All tests were conducted on a Win10 system with an **RTX 4080 Super**.
 > 4. Refer to [model_compare.py](./model_compare.py) for the conversion code.
 
 ## Features
